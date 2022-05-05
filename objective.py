@@ -45,10 +45,11 @@ class Objective(BaseObjective):
         else:
             betas = coefs
 
-        betas = np.atleast_2d(betas) 
-        
+        if betas.ndim == 1:
+            betas = betas[:, np.newaxis]
+
         path_length = betas.shape[1]
-        
+
         primals = np.empty(path_length, dtype=np.float64)
         duals = np.empty(path_length, dtype=np.float64)
 
